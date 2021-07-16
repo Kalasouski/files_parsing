@@ -7,6 +7,6 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
-        XmlParser.parse("xml_example.xml");
+        XmlParser.parseXml("myfile.xml");
     }
 }
