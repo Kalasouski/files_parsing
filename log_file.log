@@ -1,0 +1,4 @@
+2021-07-16 18:19:56 INFO  Main:18 - Entering main method
+2021-07-16 18:19:56 INFO  Main:35 - csv file format indicated
+2021-07-16 18:19:56 INFO  Main:47 - File exists
+2021-07-16 18:19:56 INFO  Main:51 - Entering getTransactionsList method in parsers.CsvParser

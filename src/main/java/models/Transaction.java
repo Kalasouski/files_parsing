@@ -1,4 +1,4 @@
-package xml;
+package models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +16,7 @@ public class Transaction {
     @Getter
     private final String currency;
     @Getter
-    private final boolean isSuccessful;
+    private final String status;
 
     public enum Status {
         COMPLETE,

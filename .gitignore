@@ -36,9 +36,9 @@
 # since they will be recreated, and may cause churn.  Uncomment if using
 # auto-import.
 # .idea/artifacts
-# .idea/compiler.xml
-# .idea/jarRepositories.xml
-# .idea/modules.xml
+# .idea/compiler.parsers.xml
+# .idea/jarRepositories.parsers.xml
+# .idea/modules.parsers.xml
 # .idea/*.iml
 # .idea/modules
 # *.iml
