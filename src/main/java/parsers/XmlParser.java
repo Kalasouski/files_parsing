@@ -1,27 +1,30 @@
 package parsers;
 
+import exceptions.TransactionParserException;
 import models.Transaction;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class XmlParser implements Parser {
-    private final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+    private final DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
 
-    public List<Transaction> getTransactionsList(String filePath)
-            throws ParserConfigurationException, IOException, SAXException {
+    public List<Transaction> getTransactionsList(String filePath) throws TransactionParserException {
         File file = new File(filePath);
-        Document doc = dbf.newDocumentBuilder().parse(file);
+        Document doc;
+        try {
+            doc = builderFactory.newDocumentBuilder().parse(file);
+        } catch (SAXException | ParserConfigurationException | IOException e) {
+            throw new TransactionParserException(e);
+        }
         doc.getDocumentElement().normalize();
         NodeList transactions = ((Element) doc.getElementsByTagName("transactions").item(0)).
                 getElementsByTagName("transaction");

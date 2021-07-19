@@ -1,5 +1,6 @@
 package parsers;
 
+import exceptions.TransactionParserException;
 import models.Transaction;
 
 import java.io.IOException;
@@ -9,8 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvParser implements Parser {
-    public List<Transaction> getTransactionsList(String filePath) throws IOException {
-        List<String> fileLines = Files.readAllLines(Paths.get(filePath));
+    public List<Transaction> getTransactionsList(String filePath) throws TransactionParserException {
+        List<String> fileLines;
+        try {
+            fileLines = Files.readAllLines(Paths.get(filePath));
+        } catch (IOException e) {
+            throw new TransactionParserException(e);
+        }
         fileLines = fileLines.subList(1, fileLines.size());
         List<Transaction> transactionList = new ArrayList<>();
         for (String fileLine : fileLines) {
