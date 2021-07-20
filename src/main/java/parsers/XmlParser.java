@@ -5,26 +5,35 @@ import models.Transaction;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
 public class XmlParser implements Parser {
-    private final DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+    private static final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
-    public List<Transaction> getTransactionsList(String filePath) throws TransactionParserException {
-        File file = new File(filePath);
-        Document doc;
+    public List<Transaction> getTransactionsList(String text) throws TransactionParserException {
+        return getTransactionsList(convertStringToXMLDocument(text));
+    }
+
+    private static Document convertStringToXMLDocument(String xmlString) throws TransactionParserException {
+        DocumentBuilder builder;
         try {
-            doc = builderFactory.newDocumentBuilder().parse(file);
-        } catch (SAXException | ParserConfigurationException | IOException e) {
+            builder = factory.newDocumentBuilder();
+            return builder.parse(new InputSource(new StringReader(xmlString)));
+        } catch (ParserConfigurationException | IOException | SAXException e) {
             throw new TransactionParserException(e);
         }
+    }
+
+    private List<Transaction> getTransactionsList(Document doc) {
         doc.getDocumentElement().normalize();
         NodeList transactions = ((Element) doc.getElementsByTagName("transactions").item(0)).
                 getElementsByTagName("transaction");

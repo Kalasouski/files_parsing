@@ -1,9 +1,11 @@
 package models;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @AllArgsConstructor
+@EqualsAndHashCode
 public class Transaction {
     @Getter
     private final String id;
@@ -17,9 +19,4 @@ public class Transaction {
     private final String currency;
     @Getter
     private final String status;
-
-    public enum Status {
-        COMPLETE,
-        FAILURE
-    }
 }

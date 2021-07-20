@@ -1,19 +1,17 @@
 import exceptions.TransactionParserException;
 import models.Transaction;
 import org.apache.log4j.Logger;
-import org.xml.sax.SAXException;
 import parsers.CsvParser;
 import parsers.Parser;
 import parsers.XmlParser;
 import service.TransactionService;
-import statictics.TransactionUtils;
 
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Comparator;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 
@@ -46,7 +44,7 @@ public class Main {
             return;
         }
         if (!new File(filePath).exists()) {
-            log.error("No "+ filePath+" file exists");
+            log.error("No " + filePath + " file exists");
             System.err.println("The " + "'" + filePath + "'" + " is invalid path for a file");
             return;
         }
@@ -55,8 +53,8 @@ public class Main {
         List<Transaction> transactions;
         try {
             log.info("Entering getTransactionsList method in " + parser.getClass().getName());
-            transactions = parser.getTransactionsList(filePath);
-        } catch (TransactionParserException e) {
+            transactions = parser.getTransactionsList(fileToString(filePath));
+        } catch (TransactionParserException | IOException e) {
             log.error("Exception thrown while parsing: ", e);
             e.printStackTrace();
             return;
@@ -123,5 +121,9 @@ public class Main {
 
         System.out.println("Max transaction: " + TransactionService.getMaxAmount(transactions));
         System.out.println("Min transaction: " + TransactionService.getMinAmount(transactions));
+    }
+
+    private static String fileToString(String filePath) throws IOException {
+        return Files.readString(Path.of(filePath));
     }
 }
