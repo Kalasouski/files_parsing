@@ -5,15 +5,20 @@ import models.Transaction;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class CsvParser implements Parser {
-    public List<Transaction> getTransactionsList(String text) throws TransactionParserException {
-        String[] lines = text.split("\n");
-        List<String> fileLines = Arrays.asList(lines);
+    @Override
+    public List<Transaction> parseFile(String path) throws TransactionParserException {
+        List<String> fileLines = null;
+        try {
+            fileLines = Files.readAllLines(Path.of(path));
+        } catch (IOException e) {
+            throw new TransactionParserException(e);
+        }
         fileLines = fileLines.subList(1, fileLines.size());
         List<Transaction> transactionList = new ArrayList<>();
         try {
@@ -33,5 +38,10 @@ public class CsvParser implements Parser {
         }
 
         return transactionList;
+    }
+
+    @Override
+    public String getSupportedExtension() {
+        return "csv";
     }
 }

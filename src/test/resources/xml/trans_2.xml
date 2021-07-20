@@ -1,0 +1,94 @@
+<root>
+    <transactions>
+        <transaction>
+            <id>t_001</id>
+            <user>
+                <id>u_001</id>
+                <first_name>Will</first_name>
+                <last_name>Smith</last_name>
+                <email>Will.Smith@example.com</email>
+            </user>
+            <timestamp>2021-04-29 16:46:13</timestamp>
+            <payment_details>
+                <amount>9 669</amount>
+                <currency>USD</currency>
+            </payment_details>
+            <status>COMPLETE</status>
+        </transaction>
+        <transaction>
+            <id>t_002</id>
+            <user>
+                <id>u_002</id>
+                <first_name>Johny</first_name>
+                <last_name>Depp</last_name>
+                <email>Johny.Depp@example.com</email>
+            </user>
+            <timestamp>2021-03-01 12:00:00</timestamp>
+            <payment_details>
+                <amount>5 000</amount>
+                <currency>USD</currency>
+            </payment_details>
+            <status>FAILURE</status>
+        </transaction>
+        <transaction>
+            <id>t_003</id>
+            <user>
+                <id>u_003</id>
+                <first_name>Johny</first_name>
+                <last_name>Depp</last_name>
+                <email>Johny.Depp@example.com</email>
+            </user>
+            <timestamp>2021-03-01 12:00:00</timestamp>
+            <payment_details>
+                <amount>123</amount>
+                <currency>USD</currency>
+            </payment_details>
+            <status>FAILURE</status>
+        </transaction>
+        <transaction>
+            <id>t_004</id>
+            <user>
+                <id>u_004</id>
+                <first_name>Johny</first_name>
+                <last_name>Depp</last_name>
+                <email>Johny.Depp@example.com</email>
+            </user>
+            <timestamp>2021-03-01 12:00:00</timestamp>
+            <payment_details>
+                <amount>7 896</amount>
+                <currency>USD</currency>
+            </payment_details>
+            <status>FAILURE</status>
+        </transaction>
+        <transaction>
+            <id>t_005</id>
+            <user>
+                <id>u_005</id>
+                <first_name>Johny</first_name>
+                <last_name>Depp</last_name>
+                <email>Johny.Depp@example.com</email>
+            </user>
+            <timestamp>2021-03-01 12:00:00</timestamp>
+            <payment_details>
+                <amount>2 445</amount>
+                <currency>USD</currency>
+            </payment_details>
+            <status>FAILURE</status>
+        </transaction>
+        <transaction>
+            <id>t_006</id>
+            <user>
+                <id>u_006</id>
+                <first_name>Johny</first_name>
+                <last_name>Depp</last_name>
+                <email>Johny.Depp@example.com</email>
+            </user>
+            <timestamp>2021-03-01 12:00:00</timestamp>
+            <payment_details>
+                <amount>3 113</amount>
+                <currency>USD</currency>
+            </payment_details>
+            <status>FAILURE</status>
+        </transaction>
+    </transactions>
+</root>

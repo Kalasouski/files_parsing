@@ -32,7 +32,7 @@ class TransactionServiceTest {
     @ParameterizedTest
     @MethodSource
     void givenGetMinAmountMethodWhenPassingTransactionListThenReturnsCorrespondingNumber(List<Transaction> transactions,
-                                                                                                           int expected) {
+                                                                                         int expected) {
         assertEquals(expected, TransactionService.getMinAmount(transactions));
     }
 
@@ -114,7 +114,7 @@ class TransactionServiceTest {
                                 new Transaction("3", "g876", "23-04-1982", 1234, "USD", "SUCCESS"),
                                 new Transaction("7", "g876", "23-04-1982", 989, "USD", "SUCCESS"),
                                 new Transaction("7", "g876", "23-04-1982", 356, "USD", "SUCCESS")
-                        ),123
+                        ), 123
                 ),
                 arguments(
                         Arrays.asList(
@@ -139,7 +139,7 @@ class TransactionServiceTest {
                                 new Transaction("3", "g876", "23-04-1982", 1234, "USD", "SUCCESS"),
                                 new Transaction("7", "g876", "23-04-1982", 989, "USD", "SUCCESS"),
                                 new Transaction("7", "g876", "23-04-1982", 356, "USD", "SUCCESS")
-                        ),5000
+                        ), 5000
                 ),
                 arguments(
                         Arrays.asList(

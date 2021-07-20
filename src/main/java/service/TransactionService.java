@@ -7,10 +7,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TransactionService {
-
     public static List<Transaction> getTopFive(List<Transaction> transactions) {
-        return transactions.stream().sorted(Comparator.comparingLong(Transaction::getAmount).reversed()).limit(5).
-                collect(Collectors.toList());
+        return transactions
+                .stream()
+                .sorted(Comparator.comparingLong(Transaction::getAmount).reversed())
+                .limit(5)
+                .collect(Collectors.toList());
     }
 
     public static int getNumberOfSuccessTransactions(List<Transaction> transactions) {

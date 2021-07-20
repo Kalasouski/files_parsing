@@ -31,7 +31,7 @@ public class Main {
             log.error("Invalid filepath. Exception thrown: ", e);
             return;
         }
-        Parser parser;
+        Parser parser; // ... = public Parser resolveParser(String extension)
         if (filePath.endsWith(".xml")) {
             log.info("xml file format indicated");
             parser = new XmlParser();
@@ -53,8 +53,8 @@ public class Main {
         List<Transaction> transactions;
         try {
             log.info("Entering getTransactionsList method in " + parser.getClass().getName());
-            transactions = parser.getTransactionsList(fileToString(filePath));
-        } catch (TransactionParserException | IOException e) {
+            transactions = parser.parseFile(filePath);
+        } catch (TransactionParserException e) {
             log.error("Exception thrown while parsing: ", e);
             e.printStackTrace();
             return;
@@ -121,9 +121,5 @@ public class Main {
 
         System.out.println("Max transaction: " + TransactionService.getMaxAmount(transactions));
         System.out.println("Min transaction: " + TransactionService.getMinAmount(transactions));
-    }
-
-    private static String fileToString(String filePath) throws IOException {
-        return Files.readString(Path.of(filePath));
     }
 }

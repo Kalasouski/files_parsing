@@ -11,6 +11,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -19,21 +20,21 @@ import java.util.List;
 public class XmlParser implements Parser {
     private static final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
-    public List<Transaction> getTransactionsList(String text) throws TransactionParserException {
-        return getTransactionsList(convertStringToXMLDocument(text));
+    @Override
+    public String getSupportedExtension() {
+        return "xml";
     }
 
-    private static Document convertStringToXMLDocument(String xmlString) throws TransactionParserException {
-        DocumentBuilder builder;
+    @Override
+    public List<Transaction> parseFile(String path) throws TransactionParserException {
+        File file = new File(path);
+        Document doc;
         try {
-            builder = factory.newDocumentBuilder();
-            return builder.parse(new InputSource(new StringReader(xmlString)));
-        } catch (ParserConfigurationException | IOException | SAXException e) {
+            doc = factory.newDocumentBuilder().parse(file);
+        } catch (SAXException | ParserConfigurationException | IOException e) {
             throw new TransactionParserException(e);
         }
-    }
 
-    private List<Transaction> getTransactionsList(Document doc) {
         doc.getDocumentElement().normalize();
         NodeList transactions = ((Element) doc.getElementsByTagName("transactions").item(0)).
                 getElementsByTagName("transaction");
