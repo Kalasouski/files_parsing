@@ -16,11 +16,11 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 class XmlParserTest {
     @ParameterizedTest
     @MethodSource
-    void givenGetTransactionsListMethodWhenPassingXmlStringThenReturnsCorrespondingList(String fileName,
+    void givenGetTransactionsListMethodWhenPassingXmlStringThenReturnsCorrespondingList(String path,
                                                                                         List<Transaction> expected)
             throws TransactionParserException {
         assertEquals(expected, new XmlParser()
-                .parseFile(getClass().getClassLoader().getResource(fileName).getPath()));
+                .parseFile(getClass().getClassLoader().getResource(path).getPath()));
     }
 
     private static Stream<Arguments> givenGetTransactionsListMethodWhenPassingXmlStringThenReturnsCorrespondingList() {

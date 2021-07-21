@@ -19,4 +19,17 @@ public class Transaction {
     private final String currency;
     @Getter
     private final String status;
+
+    @Override
+    public String toString() {
+        String msg = """
+                id: %s
+                user_id: %s
+                date: %s
+                amount: %d
+                currency: %s
+                result: %s
+                """;
+        return String.format(msg, id, userId, date, amount, currency, status);
+    }
 }

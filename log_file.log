@@ -1,11 +1,3 @@
-2021-07-20 10:29:04 INFO  Main:22 - Entering main method
-2021-07-20 10:29:04 INFO  Main:39 - csv file format indicated
-2021-07-20 10:29:04 INFO  Main:51 - File exists
-2021-07-20 10:29:04 INFO  Main:55 - Entering getTransactionsList method in parsers.CsvParser
-2021-07-20 10:29:04 ERROR Main:58 - Exception thrown while parsing: 
-exceptions.TransactionParserException: java.lang.ArrayIndexOutOfBoundsException: Index 99 out of bounds for length 6
-	at parsers.CsvParser.getTransactionsList(CsvParser.java:32)
-	at Main.main(Main.java:56)
-Caused by: java.lang.ArrayIndexOutOfBoundsException: Index 99 out of bounds for length 6
-	at parsers.CsvParser.getTransactionsList(CsvParser.java:28)
-	... 1 more
+2021-07-21 12:05:01 INFO  Main:18 - Entering main method
+2021-07-21 12:05:01 INFO  Main:43 - File exists
+2021-07-21 12:05:01 INFO  Main:47 - Entering getTransactionsList method in parsers.CsvParser
