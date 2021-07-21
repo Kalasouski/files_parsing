@@ -16,14 +16,14 @@ public class ParserFactory {
                 .filterInputsBy(new FilterBuilder().includePackage("parsers"))
                 .setUrls(ClasspathHelper.forPackage("parsers")));
         Set<Class<? extends Parser>> parserClasses = reflections.getSubTypesOf(Parser.class);
-        for(var parserClass : parserClasses) {
+        for (var parserClass : parserClasses) {
             Parser parser;
             try {
                 parser = parserClass.getDeclaredConstructor().newInstance();
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 throw new TransactionParserException(e);
             }
-            if(parser.getSupportedExtension().equals(extension))
+            if (parser.getSupportedExtension().equals(extension))
                 return parser;
         }
         throw new TransactionParserException("Invalid extension, corresponding parser not found");

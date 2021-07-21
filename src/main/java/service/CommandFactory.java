@@ -44,8 +44,8 @@ public class CommandFactory {
 
     public void printCommands() {
         int i = 1;
-        for(var entry : commandMap.entrySet()) {
-            System.out.println("["+(i++)+"] "+ entry.getValue().getDescription());
+        for (var entry : commandMap.entrySet()) {
+            System.out.println("[" + (i++) + "] " + entry.getValue().getDescription());
         }
     }
 }
