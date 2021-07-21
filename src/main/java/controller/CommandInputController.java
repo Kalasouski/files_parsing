@@ -2,7 +2,7 @@ package controller;
 
 import commands.Command;
 import exceptions.TransactionParserException;
-import service.CommandFactory;
+import factories.CommandFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;

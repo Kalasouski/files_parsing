@@ -1,4 +1,4 @@
-package service;
+package factories;
 
 import commands.Command;
 import exceptions.TransactionParserException;

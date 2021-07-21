@@ -4,7 +4,7 @@ import exceptions.TransactionParserException;
 import models.Transaction;
 import org.apache.log4j.Logger;
 import parsers.Parser;
-import service.ParserFactory;
+import factories.ParserFactory;
 
 import java.io.File;
 import java.io.IOException;
