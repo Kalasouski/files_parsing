@@ -5,9 +5,6 @@ import models.Transaction;
 import java.util.List;
 
 public class PrintAllTransactionsCommand extends Command {
-    public PrintAllTransactionsCommand(int commandId) {
-        super(commandId);
-    }
 
     @Override
     public void execute(List<Transaction> transactions) {

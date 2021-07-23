@@ -6,20 +6,22 @@ import factories.config.CommandFactoryConfig;
 import lombok.Singleton;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Singleton
 public class CommandFactory {
     private static CommandFactory instance;
-    private final List<Command> commands;
+    private final Map<Integer, Command> commands;
 
     private CommandFactory() throws ApplicationException {
         CommandFactoryConfig config = new CommandFactoryConfig("commands"); //захардкодил
         commands = config.getCommandImplementations();
     }
 
-    public List<Command> getCommands() {
-        return new ArrayList<>(this.commands);
+    public Map<Integer, Command> getCommands() {
+        return new HashMap<>(this.commands);
     }
 
     public static CommandFactory getInstance() throws ApplicationException {

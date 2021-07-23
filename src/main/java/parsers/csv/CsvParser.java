@@ -1,10 +1,10 @@
 package parsers.csv;
 
 import exceptions.ApplicationException;
-import exceptions.TransactionParserException;
 import models.Transaction;
 import parsers.Parser;
 import utils.FileUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 

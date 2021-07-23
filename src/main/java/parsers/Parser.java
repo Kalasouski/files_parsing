@@ -1,7 +1,6 @@
 package parsers;
 
 import exceptions.ApplicationException;
-import exceptions.TransactionParserException;
 import models.Transaction;
 
 import java.util.List;

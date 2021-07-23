@@ -1,7 +1,6 @@
 package parsers.xml;
 
 import exceptions.ApplicationException;
-import exceptions.TransactionParserException;
 import models.Transaction;
 import parsers.Parser;
 import parsers.xml.dom.DOMTransactionsParser;

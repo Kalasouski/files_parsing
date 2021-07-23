@@ -8,10 +8,6 @@ import java.util.List;
 public class PrintTotalsCommand extends Command {
     private final TransactionService transactionService = new TransactionService(); //захардкодил
 
-    public PrintTotalsCommand(int commandId) {
-        super(commandId);
-    }
-
     @Override
     public void execute(List<Transaction> transactions) {
         System.out.println("Total number of transactions: " + transactions.size());
@@ -25,6 +21,6 @@ public class PrintTotalsCommand extends Command {
 
     @Override
     public String getDescription() {
-        return null;
+        return "Print statistics";
     }
 }
