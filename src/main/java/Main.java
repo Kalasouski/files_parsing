@@ -1,21 +1,31 @@
-import commands.Command;
-import controller.CommandInputController;
-import exceptions.TransactionParserException;
+import exceptions.ApplicationException;
 import models.Transaction;
 import org.apache.log4j.Logger;
 import parsers.Parser;
-import factories.ParserFactory;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 
 public class Main {
     private static final Logger log = Logger.getLogger(Main.class);
 
-    public static void main(String[] args) {
-        log.info("Entering main method");
+    public static void main(String[] args) throws ApplicationException {
+
+        Application application = new Application();
+        Map<String,String> keyValueArgs = application.getKeyValueArgs(args);
+        String path = keyValueArgs.get("file");
+        String extension = application.getExtension(path);
+        Parser parser = application.resolveParser(extension);
+
+        List<Transaction> transactions = parser.parseFile(path);
+        System.out.println("File parsed successfully");
+
+
+    }
+
+    void TO_BE_DELETED_SOON() {
+        /*log.info("Entering main method");
         String filePath;
         try {
             int index;
@@ -29,7 +39,7 @@ public class Main {
         }
         Parser parser;
         try {
-            parser = ParserFactory.resolveParser(filePath.substring(filePath.lastIndexOf('.') + 1));
+            parser = ParserFactory.getParser(filePath.substring(filePath.lastIndexOf('.') + 1));
         } catch (TransactionParserException e) {
             log.error("Exception thrown resolving parser: ", e);
             e.printStackTrace();
@@ -63,6 +73,6 @@ public class Main {
             e.printStackTrace();
             return;
         }
-        command.execute(transactions);
+        command.execute(transactions);*/
     }
 }

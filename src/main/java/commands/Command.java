@@ -1,19 +1,15 @@
 package commands;
 
+import lombok.AllArgsConstructor;
 import models.Transaction;
 
 import java.util.List;
 
-public interface Command {
-    static void printTransactions(List<Transaction> transactions) {
-        for (int i = 0; i < transactions.size(); i++) {
-            Transaction transaction = transactions.get(i);
-            System.out.println("Transaction №" + i + " data");
-            System.out.println(transaction);
-        }
-    }
+@AllArgsConstructor
+public abstract class Command {
+    private final int commandId;
 
-    void execute(List<Transaction> transactions);
+    public abstract void execute(List<Transaction> transactions);
 
-    String getDescription();
+    public abstract String getDescription();
 }

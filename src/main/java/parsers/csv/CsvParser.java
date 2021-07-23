@@ -1,24 +1,22 @@
-package parsers;
+package parsers.csv;
 
+import exceptions.ApplicationException;
 import exceptions.TransactionParserException;
 import models.Transaction;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import parsers.Parser;
+import utils.FileUtils;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CsvParser implements Parser {
     @Override
-    public List<Transaction> parseFile(String path) throws TransactionParserException {
-        List<String> fileLines = null;
-        try {
-            fileLines = Files.readAllLines(Path.of(path));
-        } catch (IOException e) {
-            throw new TransactionParserException(e);
-        }
+    public List<Transaction> parseFile(String path) throws ApplicationException {
+        List<String> fileLines = FileUtils.getFileStrings(path);
         fileLines = fileLines.subList(1, fileLines.size());
+        return getTransactionList(fileLines);
+    }
+
+    private List<Transaction> getTransactionList(List<String> fileLines) throws ApplicationException {
         List<Transaction> transactionList = new ArrayList<>();
         try {
             for (String fileLine : fileLines) {
@@ -33,7 +31,7 @@ public class CsvParser implements Parser {
                 transactionList.add(new Transaction(id, userId, date, amount, currency, status));
             }
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
-            throw new TransactionParserException(e);
+            throw new ApplicationException(e);
         }
 
         return transactionList;

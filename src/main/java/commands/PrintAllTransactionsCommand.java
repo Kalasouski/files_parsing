@@ -4,10 +4,14 @@ import models.Transaction;
 
 import java.util.List;
 
-public class AllTransactionsPrinter implements Command {
+public class PrintAllTransactionsCommand extends Command {
+    public PrintAllTransactionsCommand(int commandId) {
+        super(commandId);
+    }
+
     @Override
     public void execute(List<Transaction> transactions) {
-        Command.printTransactions(transactions);
+        transactions.forEach(System.out::println);
     }
 
     @Override

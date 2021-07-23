@@ -1,5 +1,6 @@
-package parsers.xml.dom.factory;
+package parsers.xml.dom;
 
+import exceptions.ApplicationException;
 import exceptions.TransactionParserException;
 import lombok.Singleton;
 import org.w3c.dom.Document;
@@ -14,12 +15,12 @@ import java.io.IOException;
 public class DocumentFactory {
     private static final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
-    public Document getDocument(String path) throws TransactionParserException {
+    public Document getDocument(String path) throws ApplicationException {
         Document doc;
         try {
             doc = factory.newDocumentBuilder().parse(new File(path));
         } catch (SAXException | ParserConfigurationException | IOException e) {
-            throw new TransactionParserException(e);
+            throw new ApplicationException(e);
         }
         doc.getDocumentElement().normalize();
         return doc;
