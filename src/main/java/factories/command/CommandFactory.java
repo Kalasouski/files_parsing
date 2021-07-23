@@ -2,6 +2,7 @@ package factories.command;
 
 import commands.Command;
 import exceptions.ApplicationException;
+import exceptions.factory.ApplicationFactoryException;
 import factories.config.CommandFactoryConfig;
 import lombok.Singleton;
 
@@ -15,7 +16,7 @@ public class CommandFactory {
     private static CommandFactory instance;
     private final Map<Integer, Command> commands;
 
-    private CommandFactory() throws ApplicationException {
+    private CommandFactory() throws ApplicationFactoryException {
         CommandFactoryConfig config = new CommandFactoryConfig("commands"); //захардкодил
         commands = config.getCommandImplementations();
     }
@@ -24,7 +25,7 @@ public class CommandFactory {
         return new HashMap<>(this.commands);
     }
 
-    public static CommandFactory getInstance() throws ApplicationException {
+    public static CommandFactory getInstance() throws ApplicationFactoryException {
         if (instance==null)
             instance = new CommandFactory();
         return instance;

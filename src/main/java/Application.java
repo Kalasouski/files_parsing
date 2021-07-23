@@ -1,5 +1,9 @@
 import commands.Command;
 import exceptions.ApplicationException;
+import exceptions.CommandLineArgsException;
+import exceptions.ExtensionResolvingException;
+import exceptions.factory.ApplicationFactoryException;
+import exceptions.factory.CommandResolvingException;
 import factories.command.CommandFactory;
 import factories.parser.ParserFactory;
 import models.Transaction;
@@ -16,35 +20,36 @@ public class Application {
 
     private Map<Integer, Command> commands;
 
-    public Map<String, String> getKeyValueArgs(String[] args) throws ApplicationException {
+    public Map<String, String> getKeyValueArgs(String[] args) throws CommandLineArgsException {
         Map<String, String> arguments = new HashMap<>();
 
         for (String arg : args) {
             String[] pair = arg.split("=");
             if (pair.length != 2) {
-                throw new ApplicationException("Invalid args");
+                throw new CommandLineArgsException("Invalid args");
             }
             arguments.put(pair[0], pair[1]);
         }
         return arguments;
     }
 
-    public String getExtension(String path) throws ApplicationException {
+    public String getExtension(String path) throws ExtensionResolvingException {
         if (path == null || path.isEmpty()) {
-            throw new ApplicationException("Invalid path");
+            throw new ExtensionResolvingException("Invalid path");
         }
-        return path.substring(path.lastIndexOf('.') + 1);
+        int pointIndex = path.lastIndexOf('.');
+        if (pointIndex == -1 || pointIndex == path.length() - 1) {
+            throw new ExtensionResolvingException("Invalid path");
+        }
+        return path.substring(pointIndex + 1);
     }
 
     public Parser resolveParser(String extension) throws ApplicationException {
-        if (extension == null) {
-            throw new ApplicationException("null extension");
-        }
         ParserFactory factory = ParserFactory.getInstance();
         return factory.getParser(extension);
     }
 
-    public void initCommands() throws ApplicationException {
+    public void initCommands() throws ApplicationFactoryException {
         CommandFactory commandFactory = CommandFactory.getInstance();
         commands = commandFactory.getCommands();
     }
@@ -62,14 +67,14 @@ public class Application {
         try {
             return Integer.parseInt(reader.readLine());
         } catch (IOException | NumberFormatException e) {
-            throw new ApplicationException(e);
+            throw new CommandResolvingException(e);
         }
     }
 
-    public void executeCommand(int commandId, List<Transaction> transactions) throws ApplicationException {
+    public void executeCommand(int commandId, List<Transaction> transactions) throws CommandResolvingException {
         Command command = commands.get(commandId);
         if (command == null) {
-            throw new ApplicationException("Invalid id " + commandId);
+            throw new CommandResolvingException("Invalid id " + commandId);
         }
         command.execute(transactions);
     }

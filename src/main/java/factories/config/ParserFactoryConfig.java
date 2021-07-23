@@ -1,6 +1,8 @@
 package factories.config;
 
 import exceptions.ApplicationException;
+import exceptions.factory.NoSuchPackageException;
+import exceptions.factory.ParserResolvingException;
 import factories.config.reflections.ReflectionsManager;
 import parsers.Parser;
 
@@ -13,11 +15,11 @@ import java.util.Set;
 public class ParserFactoryConfig {
     ReflectionsManager reflectionsManager;
 
-    public ParserFactoryConfig(String packageToScan) {
+    public ParserFactoryConfig(String packageToScan) throws NoSuchPackageException {
         reflectionsManager = new ReflectionsManager(packageToScan);
     }
 
-    public Map<String, Parser> getParserImplementations() throws ApplicationException {
+    public Map<String, Parser> getParserImplementations() throws ParserResolvingException {
         Set<Class<? extends Parser>> classes = reflectionsManager.getSubTypesOf(Parser.class); //захардкодил
         Map<String, Parser> impls = new HashMap<>();
         for (var impl : classes) {
@@ -25,7 +27,7 @@ public class ParserFactoryConfig {
             try {
                 parser = impl.getDeclaredConstructor().newInstance();
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                throw new ApplicationException(e);
+                throw new ParserResolvingException(e);
             }
             impls.put(parser.getSupportedExtension(), parser);
         }

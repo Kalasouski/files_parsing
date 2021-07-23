@@ -1,6 +1,8 @@
 package factories.parser;
 
 import exceptions.ApplicationException;
+import exceptions.factory.ApplicationFactoryException;
+import exceptions.factory.ParserResolvingException;
 import factories.config.ParserFactoryConfig;
 import lombok.Singleton;
 import parsers.Parser;
@@ -12,15 +14,15 @@ public class ParserFactory {
     private final Map<String,Parser> parserImpls;
     private static ParserFactory instance;
 
-    private ParserFactory() throws ApplicationException {
+    private ParserFactory() throws ApplicationFactoryException {
         ParserFactoryConfig config = new ParserFactoryConfig("parsers"); //захардкодил
         parserImpls = config.getParserImplementations();
     }
 
-    public Parser getParser(String extension) throws ApplicationException {
+    public Parser getParser(String extension) throws ParserResolvingException {
         Parser parser = parserImpls.get(extension);
         if(parser==null)
-            throw new ApplicationException("No such parser");
+            throw new ParserResolvingException("No such parser");
         return parser;
     }
 

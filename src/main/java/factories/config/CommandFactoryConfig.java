@@ -2,8 +2,9 @@ package factories.config;
 
 import commands.Command;
 import exceptions.ApplicationException;
+import exceptions.factory.CommandResolvingException;
+import exceptions.factory.NoSuchPackageException;
 import factories.config.reflections.ReflectionsManager;
-import parsers.Parser;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
@@ -11,11 +12,11 @@ import java.util.*;
 public class CommandFactoryConfig {
     ReflectionsManager reflectionsManager;
 
-    public CommandFactoryConfig(String packageToScan) {
+    public CommandFactoryConfig(String packageToScan) throws NoSuchPackageException {
         reflectionsManager = new ReflectionsManager(packageToScan);
     }
 
-    public Map<Integer, Command> getCommandImplementations() throws ApplicationException {
+    public Map<Integer, Command> getCommandImplementations() throws CommandResolvingException {
         Set<Class<? extends Command>> classes = reflectionsManager.getSubTypesOf(Command.class);
         int commandId = 1;
         Map<Integer, Command> commands = new HashMap<>();
@@ -24,7 +25,7 @@ public class CommandFactoryConfig {
             try {
                 command = impl.getDeclaredConstructor().newInstance();
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                throw new ApplicationException(e);
+                throw new CommandResolvingException(e);
             }
             commands.put(commandId++,command);
         }

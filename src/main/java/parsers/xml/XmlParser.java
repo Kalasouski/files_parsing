@@ -1,6 +1,7 @@
 package parsers.xml;
 
 import exceptions.ApplicationException;
+import exceptions.TransactionFileParsingException;
 import models.Transaction;
 import parsers.Parser;
 import parsers.xml.dom.DOMTransactionsParser;
@@ -18,7 +19,7 @@ public class XmlParser implements Parser {
     }
 
     @Override
-    public List<Transaction> parseFile(String path) throws ApplicationException {
+    public List<Transaction> parseFile(String path) throws TransactionFileParsingException {
         DOMTransactionsParser domTransactionsParser = new DOMTransactionsParser(documentFactory.getDocument(path));
         return domTransactionsParser.getTransactionsList();
     }
