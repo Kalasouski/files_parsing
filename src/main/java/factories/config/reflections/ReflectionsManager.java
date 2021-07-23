@@ -14,11 +14,10 @@ public class ReflectionsManager {
     public ReflectionsManager(String packageToScan) throws NoSuchPackageException {
         try {
             scanner = new Reflections(new ConfigurationBuilder()
-                    .setUrls(ClasspathHelper.forPackage(packageToScan+"fg")));
+                    .setUrls(ClasspathHelper.forPackage(packageToScan)));
         } catch (ReflectionsException e) {
             throw new NoSuchPackageException("No package "+packageToScan+" found");
         }
-
     }
 
     public <T> Set<Class<? extends T>> getSubTypesOf(Class<T> cl) {

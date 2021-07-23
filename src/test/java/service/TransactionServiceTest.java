@@ -14,33 +14,35 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class TransactionServiceTest {
+    private final TransactionService transactionService = TransactionService.getInstance();
+
     @ParameterizedTest
     @MethodSource
     void givenGetTopFiveMethodWhenPassingTransactionListThenReturnsCorrespondingList(List<Transaction> transactions,
                                                                                      List<Transaction> expected) {
-        //List<Transaction> topFiveList = TransactionService.getTopFive(transactions);
-       // assertTrue(topFiveList.containsAll(expected) && expected.containsAll(topFiveList));
+        List<Transaction> topFiveList = transactionService.getTopFive(transactions);
+        assertTrue(topFiveList.containsAll(expected) && expected.containsAll(topFiveList));
     }
 
     @ParameterizedTest
     @MethodSource
     void givenGetNumberOfSuccessTransactionsMethodWhenPassingTransactionListThenReturnsCorrespondingNumber(List<Transaction> transactions,
                                                                                                            int expected) {
-       // assertEquals(expected, TransactionService.getNumberOfSuccessTransactions(transactions));
+        assertEquals(expected, transactionService.getNumberOfSuccessTransactions(transactions));
     }
 
     @ParameterizedTest
     @MethodSource
     void givenGetMinAmountMethodWhenPassingTransactionListThenReturnsCorrespondingNumber(List<Transaction> transactions,
                                                                                          int expected) {
-        //assertEquals(expected, TransactionService.getMinAmount(transactions));
+        assertEquals(expected, transactionService.getMinAmount(transactions));
     }
 
     @ParameterizedTest
     @MethodSource
     void givenGetMaxAmountMethodWhenPassingTransactionListThenReturnsCorrespondingNumber(List<Transaction> transactions,
                                                                                          int expected) {
-        //assertEquals(expected, TransactionService.getMaxAmount(transactions));
+        assertEquals(expected, transactionService.getMaxAmount(transactions));
     }
 
     private static Stream<Arguments> givenGetTopFiveMethodWhenPassingTransactionListThenReturnsCorrespondingList() {

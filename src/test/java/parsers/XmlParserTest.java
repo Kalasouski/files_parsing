@@ -1,23 +1,31 @@
 package parsers;
 
+import exceptions.TransactionFileParsingException;
 import models.Transaction;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import parsers.xml.XmlParser;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class XmlParserTest {
+
+class XmlParserTest extends ParserTest {
+    protected XmlParserTest() {
+        super(new XmlParser());
+    }
+
     @ParameterizedTest
     @MethodSource
     void givenGetTransactionsListMethodWhenPassingXmlStringThenReturnsCorrespondingList(String path,
-                                                                                        List<Transaction> expected) {
-      /*  assertEquals(expected, new XmlParser()
-                .parseFile(getClass().getClassLoader().getResource(path).getPath()));*/
+                                                                                        List<Transaction> expected)
+            throws TransactionFileParsingException {
+        assertEquals(expected, super.parseFile(path));
     }
 
     private static Stream<Arguments> givenGetTransactionsListMethodWhenPassingXmlStringThenReturnsCorrespondingList() {

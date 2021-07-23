@@ -6,7 +6,7 @@ import service.TransactionService;
 import java.util.List;
 
 public class PrintTotalsCommand extends Command {
-    private final TransactionService transactionService = new TransactionService(); //захардкодил
+    private final TransactionService transactionService = TransactionService.getInstance(); //захардкодил
 
     @Override
     public void execute(List<Transaction> transactions) {

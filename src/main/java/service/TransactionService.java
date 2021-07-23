@@ -9,6 +9,16 @@ import java.util.stream.Collectors;
 
 @Singleton
 public class TransactionService {
+
+    private static final TransactionService transactionService = new TransactionService();
+
+    private TransactionService(){
+    }
+
+    public static TransactionService getInstance() {
+        return transactionService;
+    }
+
     public List<Transaction> getTopFive(List<Transaction> transactions) {
         return transactions
                 .stream()

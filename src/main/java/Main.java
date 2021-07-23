@@ -20,9 +20,15 @@ public class Main {
         List<Transaction> transactions = parser.parseFile(path);
         System.out.println("File parsed successfully");
         application.initCommands();
-        application.printCommands();
-        int commandId = application.readCommandId();
 
-        application.executeCommand(commandId,transactions);
+
+        while (true) {
+            application.printCommands();
+            int commandId = application.readCommandId();
+            if(commandId == 0)
+                break;
+            application.executeCommand(commandId,transactions);
+        }
+        System.out.println("Exiting...");
     }
 }

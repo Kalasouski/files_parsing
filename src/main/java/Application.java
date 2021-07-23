@@ -6,6 +6,7 @@ import exceptions.factory.ApplicationFactoryException;
 import exceptions.factory.CommandResolvingException;
 import factories.command.CommandFactory;
 import factories.parser.ParserFactory;
+import lombok.extern.slf4j.Slf4j;
 import models.Transaction;
 import parsers.Parser;
 
@@ -16,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 public class Application {
 
     private Map<Integer, Command> commands;
@@ -26,6 +28,7 @@ public class Application {
         for (String arg : args) {
             String[] pair = arg.split("=");
             if (pair.length != 2) {
+                log.error("Invalid argument: "+arg);
                 throw new CommandLineArgsException("Invalid args");
             }
             arguments.put(pair[0], pair[1]);
@@ -35,6 +38,7 @@ public class Application {
 
     public String getExtension(String path) throws ExtensionResolvingException {
         if (path == null || path.isEmpty()) {
+
             throw new ExtensionResolvingException("Invalid path");
         }
         int pointIndex = path.lastIndexOf('.');
