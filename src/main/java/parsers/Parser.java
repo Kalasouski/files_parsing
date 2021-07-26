@@ -1,6 +1,5 @@
 package parsers;
 
-import exceptions.ApplicationException;
 import exceptions.TransactionFileParsingException;
 import models.Transaction;
 

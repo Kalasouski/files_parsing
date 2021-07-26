@@ -1,6 +1,5 @@
 package parsers.csv;
 
-import exceptions.ApplicationException;
 import exceptions.TransactionFileParsingException;
 import models.Transaction;
 import parsers.Parser;

@@ -1,6 +1,5 @@
 package parsers.xml.dom;
 
-import exceptions.ApplicationException;
 import exceptions.TransactionFileParsingException;
 import lombok.Singleton;
 import org.w3c.dom.Document;

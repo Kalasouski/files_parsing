@@ -15,6 +15,6 @@ public class PrintTop5TransactionsCommand extends Command {
 
     @Override
     public String getDescription() {
-        return  "Print top-5 transactions";
+        return "Print top-5 transactions";
     }
 }

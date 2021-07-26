@@ -12,7 +12,7 @@ public class TransactionService {
 
     private static final TransactionService transactionService = new TransactionService();
 
-    private TransactionService(){
+    private TransactionService() {
     }
 
     public static TransactionService getInstance() {

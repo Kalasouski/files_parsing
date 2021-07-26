@@ -1,0 +1,6 @@
+2021-07-26 15:07:30,665 INFO Application [main] sdgh 
+2021-07-26 15:07:30,748 INFO o.r.Reflections [main] Reflections took 71 ms to scan 1 urls, producing 5 keys and 13 values  
+2021-07-26 15:07:30,779 INFO o.r.Reflections [main] Reflections took 18 ms to scan 1 urls, producing 5 keys and 13 values  
+2021-07-26 15:15:40,841 INFO Application [main] sdgh 
+2021-07-26 15:15:40,885 INFO o.r.Reflections [main] Reflections took 35 ms to scan 1 urls, producing 5 keys and 13 values  
+2021-07-26 15:15:40,907 INFO o.r.Reflections [main] Reflections took 8 ms to scan 1 urls, producing 5 keys and 13 values  

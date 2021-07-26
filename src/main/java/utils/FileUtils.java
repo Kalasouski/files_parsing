@@ -1,6 +1,5 @@
 package utils;
 
-import exceptions.ApplicationException;
 import exceptions.TransactionFileParsingException;
 
 import java.io.IOException;
